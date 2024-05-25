@@ -19,6 +19,11 @@ Vagrant.configure("2") do |config|
     # disable shared folders
     node.vm.synced_folder ".", "/vagrant", disabled: true
 
+    node.vm.provision "ansible" do |ansible|
+      ansible.compatibility_mode = "2.0"
+      ansible.playbook = "ansible/playbook-vagrant.yml"
+    end # node.vm.provision
+
   end # config.vm.define
 
 end # Vagrant.configure
