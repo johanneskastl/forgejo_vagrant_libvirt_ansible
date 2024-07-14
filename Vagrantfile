@@ -1,10 +1,10 @@
 Vagrant.configure("2") do |config|
 
   ###################################################################################
-  config.vm.define "falco" do |node|
+  config.vm.define "forgejo" do |node|
 
     # which image to use
-    node.vm.box = "opensuse/Leap-15.5.x86_64"
+    node.vm.box = "opensuse/Leap-15.6.x86_64"
 
     # sizing of the VMs
     node.vm.provider "libvirt" do |lv|
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
     end
 
     # set the hostname
-    node.vm.hostname = "falco"
+    node.vm.hostname = "forgejo"
 
     # disable shared folders
     node.vm.synced_folder ".", "/vagrant", disabled: true
