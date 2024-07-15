@@ -18,6 +18,12 @@
         name: 'forgejo'
         state: 'restarted'
 
+    - name: 'Create admin user'
+      ansible.builtin.command:
+        cmd: |
+          forgejo admin user -c /etc/forgejo/conf/app.ini create --username forgejo-admin --email forgejo-admin@invalid --password totallyinsecure --admin
+      become_user: forgejo
+
   tasks:
 
     - name: 'Create /etc/forgejo/conf/app.ini'
@@ -35,6 +41,8 @@
         name: 'forgejo'
         state: 'started'
         enabled: true
+      notify:
+        - 'Create admin user'
 
     - name: 'Output Forgejo URL'
       ansible.builtin.debug:
