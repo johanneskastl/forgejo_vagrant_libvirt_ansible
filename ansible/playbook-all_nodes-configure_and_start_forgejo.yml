@@ -1,0 +1,30 @@
+---
+- name: 'Configure and start forgejo'
+  hosts: 'all'
+  gather_facts: true
+  become: true
+
+  handlers:
+
+    - name: 'Restart the forgejo service'
+      ansible.builtin.service:
+        name: 'forgejo'
+        state: 'restarted'
+
+  tasks:
+
+    - name: 'Create /etc/forgejo/conf/app.ini'
+      ansible.builtin.template:
+        src: 'app.ini.j2'
+        dest: '/etc/forgejo/conf/app.ini'
+        owner: 'forgejo'
+        group: 'forgejo'
+        mode: '660'
+      notify:
+        - 'Restart the forgejo service'
+
+    - name: 'Start and enable the forgejo service'
+      ansible.builtin.service:
+        name: 'forgejo'
+        state: 'started'
+        enabled: true
