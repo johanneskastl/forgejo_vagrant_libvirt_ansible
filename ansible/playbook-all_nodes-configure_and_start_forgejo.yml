@@ -19,8 +19,9 @@
         state: 'restarted'
 
     - name: 'Create admin user'
-      ansible.builtin.command:
+      ansible.builtin.shell:
         cmd: |
+          sleep 3
           forgejo admin user -c /etc/forgejo/conf/app.ini create --username forgejo-admin --email forgejo-admin@invalid --password totallyinsecure --admin
       become_user: forgejo
 
