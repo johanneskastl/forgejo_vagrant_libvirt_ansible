@@ -20,3 +20,6 @@
 
 - name: 'Run playbook-all_nodes-install_forgejo.yml'
   ansible.builtin.import_playbook: playbook-all_nodes-install_forgejo.yml
+
+- name: 'Run playbook-all_nodes-configure_and_start_forgejo.yml'
+  ansible.builtin.import_playbook: playbook-all_nodes-configure_and_start_forgejo.yml
