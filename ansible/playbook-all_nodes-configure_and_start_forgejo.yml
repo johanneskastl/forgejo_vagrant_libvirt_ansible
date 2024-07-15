@@ -45,6 +45,8 @@
       notify:
         - 'Create admin user'
 
+  post_tasks:
+
     - name: 'Output Forgejo URL'
       ansible.builtin.debug:
         msg: "Forgejo is waiting for you on this URL: http://{{ hostvars['forgejo']['ansible_default_ipv4']['address'] }}:3000"
