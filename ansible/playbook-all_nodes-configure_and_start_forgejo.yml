@@ -18,10 +18,10 @@
         name: 'forgejo'
         state: 'restarted'
 
-    - name: 'Create admin user'
+    - name: 'Create admin user (pauses 10 seconds to avoid hitting a locked database after the service restart'
       ansible.builtin.shell:
         cmd: |
-          sleep 3
+          sleep 10
           forgejo admin user -c /etc/forgejo/conf/app.ini create --username forgejo-admin --email forgejo-admin@invalid --password totallyinsecure --admin
       become_user: forgejo
 
@@ -43,7 +43,7 @@
         state: 'started'
         enabled: true
       notify:
-        - 'Create admin user'
+        - 'Create admin user (pauses 10 seconds to avoid hitting a locked database after the service restart'
 
   post_tasks:
 
